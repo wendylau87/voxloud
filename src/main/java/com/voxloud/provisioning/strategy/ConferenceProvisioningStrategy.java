@@ -21,4 +21,13 @@ public class ConferenceProvisioningStrategy extends AbstractProvisioningStrategy
             .append("}")
             .toString();
     }
+
+    @Override
+    protected String getProperty(String key, String overrideFragment) {
+        if ("provisioning.codecs".equals(key)) {
+            String codecs = super.getProperty(key, overrideFragment);
+            return "[\"" + codecs.replace(",", "\",\"") + "\"]";
+        }
+        return super.getProperty(key, overrideFragment);
+    }
 } 
